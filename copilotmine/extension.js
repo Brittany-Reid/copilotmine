@@ -14,8 +14,23 @@ const TIMEOUT = 20000;
  * @returns {string} The formatted snippet.
  */
 function formatPythonSnippet(comment){
-	var snippet = "#" + comment + "\n";
+	var snippet = "# " + comment + "\n";
 	snippet+="def";
+	return snippet;
+}
+
+/**
+ * Given a comment or query, formats a partial Java snippet for inserting in the format:
+ * 	// {comment}
+ * 	public class Clazz{
+ * 		public
+ * @param {string} comment The comment or query string to use.
+ * @returns {string} The formatted snippet.
+ */
+ function formatJavaSnippet(comment){
+	var snippet = "//" + comment + "\n";
+	snippet+="public class Clazz{\n";
+	snippet+="\tpublic\n";
 	return snippet;
 }
 
@@ -47,29 +62,33 @@ function activate(context) {
 		var lines = file.split("\n")
 		var row = 0;
 		var queries = [];
+		var start = 380;
+		var end = start + 10;
 		for(var l of lines){
-			if(row <= 0){
+			if(row < start){
 				row++;
 				continue;
 			}
 			//do first 10
-			if(row === 11)
+			if(row >= end){
 				break;
+			}
 			var columns = l.split("\t")
 			var query = {
-				id: columns[0],
+				id: parseInt(columns[0]),
 				source: columns[1],
 				language: columns[2],
 				query: columns[3],
 				snippets: []
 			}
-			if(query.id <= 383){
-				row++;
-				continue;
-			}
+			// 	row++;
+			// 	continue;
+			// }
 			queries.push(query);
 			row++;
 		}
+
+		console.log(queries)
 
 		/**
 		 * Gets range of entire text in a editor.
@@ -115,6 +134,8 @@ function activate(context) {
 				return;
 			}
 			var snippet;
+			// the langauge info does actually matter, otherwise we get odd results
+			vscode.languages.setTextDocumentLanguage(editor.document, lang);
 			if(lang === "python")
 				snippet = formatPythonSnippet(query);
 			else{
@@ -143,7 +164,7 @@ function activate(context) {
 							//focus the text editor again
 							vscode.window.showTextDocument(textEditor.document, { preview: false, viewColumn: textEditor.viewColumn, })
 							.then(()=>{
-								resolve(results.slice(1, results.length));
+								resolve(results);
 							});
 							
 						}, TIMEOUT);
@@ -167,7 +188,14 @@ function activate(context) {
 			var text = q.query;
 			var lang = q.language;
 			getSnippets(text, lang).then(snippets => {
+				var number = snippets[0];
+				console.log(number)
+				number = number.split("Synthesizing ")[1]
+				number = parseInt(number.split("/")[0])
+
+				snippets = snippets.slice(1, snippets.length)
 				q.snippets = snippets;
+				q.results = number;
 				fs.appendFileSync(snippetPath, JSON.stringify(q, undefined, 4) + ",");
 				if(i < queries.length - 1){
 					doQuery(i+1);

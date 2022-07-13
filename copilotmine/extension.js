@@ -34,6 +34,8 @@ function formatPythonSnippet(comment){
 	return snippet;
 }
 
+var currentLang = undefined;
+
 /**
  * Returns the absolute path to a file located in our data folder.
  *
@@ -73,9 +75,10 @@ function activate(context) {
 			if(row >= end){
 				break;
 			}
-			var columns = l.split("\t")
+			l = l.trim()
+			var columns = l.split("\t");
 			var query = {
-				id: parseInt(columns[0]),
+				id: columns[0],
 				source: columns[1],
 				language: columns[2],
 				query: columns[3],
@@ -87,8 +90,6 @@ function activate(context) {
 			queries.push(query);
 			row++;
 		}
-
-		console.log(queries)
 
 		/**
 		 * Gets range of entire text in a editor.
@@ -125,6 +126,21 @@ function activate(context) {
 			}
 		}
 
+		function focusNonPilot(){
+			var editors = vscode.window.visibleTextEditors;
+			var textEditor = undefined
+
+			for(var e of editors){
+				if(e.document.fileName !== 'GitHub Copilot'){
+					textEditor = e;
+					break;
+				}
+			}
+
+			//focus the text editor again
+			return vscode.window.showTextDocument(textEditor.document, { preview: false, viewColumn: textEditor.viewColumn, })
+		}
+
 		function getSnippets(query, lang){
 
 			//get active editor
@@ -133,46 +149,46 @@ function activate(context) {
 				vscode.window.showErrorMessage("Editor does not exist!");
 				return;
 			}
-			var snippet;
-			// the langauge info does actually matter, otherwise we get odd results
-			vscode.languages.setTextDocumentLanguage(editor.document, lang);
-			if(lang === "python")
-				snippet = formatPythonSnippet(query);
-			else{
-				snippet = formatJavaSnippet(query);
+			if(editor.document.fileName === "GitHub Copilot"){
+				console.log("bad things happened")
+				focusNonPilot();
 			}
+
+			var snippet;
 			return new Promise(function(resolve, reject) {
-				editor.edit(editBuilder => {
-					var range = getRangeOfAll(editor);
-					editBuilder.replace(range, snippet);
-				}).then(function(){
-					var range = getRangeOfAll(editor);
-					callCommand('github.copilot.openPanelForRange', range).then(()=>{
-						//wait some time to get results
-						return setTimeout(function(){
-							var editors = vscode.window.visibleTextEditors;
-							var textEditor = undefined
-							for(var e of editors){
-								if(e.document.fileName == 'GitHub Copilot'){
-									var results = e.document.getText();
-									results = results.split("\n=======\n\n");
+				// the langauge info does actually matter, otherwise we get odd results
+				vscode.languages.setTextDocumentLanguage(editor.document, lang).then(()=>{
+					if(lang === "python")
+						snippet = formatPythonSnippet(query);
+					else{
+						snippet = formatJavaSnippet(query);
+					}
+					editor.edit(editBuilder => {
+						var range = getRangeOfAll(editor);
+						editBuilder.replace(range, snippet);
+					}).then(function(){
+						var range = getRangeOfAll(editor);
+						callCommand('github.copilot.openPanelForRange', range).then(()=>{
+							//wait some time to get results
+							return setTimeout(function(){
+								var editors = vscode.window.visibleTextEditors;
+								for(var e of editors){
+									if(e.document.fileName == 'GitHub Copilot'){
+										var results = e.document.getText();
+										results = results.split("\n=======\n\n");
+									}
 								}
-								else{
-									textEditor = e;
-								}
-							}
-							//focus the text editor again
-							vscode.window.showTextDocument(textEditor.document, { preview: false, viewColumn: textEditor.viewColumn, })
-							.then(()=>{
-								resolve(results);
-							});
-							
-						}, TIMEOUT);
-					})
-					//this catches errors in other parts of the program :/
-					.then(undefined, err => {
-						console.log(err);
-					 })
+								focusNonPilot().then(()=>{
+									resolve(results);
+								})
+								
+							}, TIMEOUT);
+						})
+					// 	//this catches errors in other parts of the program :/
+					// 	.then(undefined, err => {
+					// 		console.log(err);
+					// 	})
+					});
 				});
 			});
         }
@@ -188,8 +204,7 @@ function activate(context) {
 			var text = q.query;
 			var lang = q.language;
 			getSnippets(text, lang).then(snippets => {
-				var number = snippets[0];
-				console.log(number)
+				var number =snippets[0];
 				number = number.split("Synthesizing ")[1]
 				number = parseInt(number.split("/")[0])
 

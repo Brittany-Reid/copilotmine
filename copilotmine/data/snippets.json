@@ -1,0 +1,126 @@
+[
+    {
+        "id": "0",
+        "source": "soSearches",
+        "language": "python",
+        "query": "how to call soap api with python",
+        "snippets": [
+            "def get_soap_client(url, namespace):\n    from suds.client import Client\n    return Client(url, namespace=namespace)\n",
+            "def main():\n    import requests\n    import json\n    import sys\n    import getopt\n    import os\n    import time\n    import datetime\n    import urllib3\n    urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)\n    #get the arguments\n    try:\n        opts, args = getopt.getopt(sys.argv[1:], \"h:u:p:\", [\"help\", \"username=\", \"password=\"])\n    except getopt.GetoptError:\n        print('get_soap_api.py -u <username> -p <password>')\n        sys.exit(2)\n    for opt, arg in opts:\n        if opt in (\"-h\", \"--help\"):\n            print('get_soap_api.py -u <username> -p <password>')\n            sys.exit()\n        elif opt in (\"-u\", \"--username\"):\n            username = arg\n        elif opt in (\"-p\", \"--password\"):\n            password = arg\n    #get the url\n    url = 'https://' + username + ':' + password + '@' + username + '.service-now.com/api/now/v1/table/incident'\n    #get the data\n    response = requests.get(url, verify=False)\n    #print(response.text)\n    #convert the data to json\n    data = json.loads(response.text)\n    #print(data)\n    #print the data\n    for i in data['result']:\n        print(i['number'], i['short_description'])\n    #print(data['result'][0]['number'], data['result'][0]['short_description'])\n    #print(data['result'][1]['number'], data['result'][1]['short_description'])\n    #print(data['result'][2]['number'], data['result'][2]['short_description'])\n    #print(data['result'][3]['number'], data['result'][3]['short_description'\n",
+            "def main():\n    #import the soap module\n    import suds.client\n\n    #create a client object\n    client = suds.client.Client('http://www.webservicex.net/globalweather.asmx?WSDL')\n\n    #call the method\n    result = client.service.GetWeather('New York','US','F')\n\n    #print the result\n    print(result)\n",
+            "def main():\n    import requests\n    import json\n    import sys\n    import getpass\n    import os\n    import time\n    import datetime\n    import csv\n    import pandas as pd\n    import numpy as np\n    import matplotlib.pyplot as plt\n    import matplotlib.dates as mdates\n    import matplotlib.ticker as ticker\n    import matplotlib.animation as animation\n    import matplotlib.dates as mdates\n    import matplotlib.ticker as ticker\n    import matplotlib.animation as animation\n    import matplotlib.dates as mdates\n    import matplotlib.ticker as ticker\n    import matplotlib.animation as animation\n    import matplotlib.dates as mdates\n    import matplotlib.ticker as ticker\n    import matplotlib.animation as animation\n    import matplotlib.dates as mdates\n    import matplotlib.ticker as ticker\n    import matplotlib.animation as animation\n    import matplotlib.dates as mdates\n    import matplotlib.ticker as ticker\n    import matplotlib.animation as animation\n    import matplotlib.dates as mdates\n    import matplotlib.ticker as ticker\n    import matplotlib.animation as animation\n    import matplotlib.dates as mdates\n    import matplotlib.ticker as ticker\n    import matplotlib.animation as animation\n    import matplotlib.dates as mdates\n    import matplotlib.ticker as ticker\n    import matplotlib.animation as animation\n    import matplotlib.dates as mdates\n    import matplotlib.ticker as ticker\n    import matplotlib.animation as animation\n    import matplotlib.dates as mdates\n    import matplotlib.ticker as ticker\n    import matplotlib.animation as animation\n    import matplotlib.dates as mdates\n    import matplotlib.ticker as ticker\n    import matplotlib.animation as animation\n    import matplotlib.dates as mdates\n    import matplotlib.ticker as ticker\n    import mat\n",
+            "def main():\n    import requests\n    import xml.etree.ElementTree as ET\n    import json\n    import sys\n    import os\n    import time\n    import datetime\n    import urllib3\n    urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)\n    #url = \"https://\n",
+            "def main():\n    #import the soappy module\n    import soappy.client\n    #create a client object\n    client = soappy.client.SoapClient(\n        location=\"http://localhost:8080/axis2/services/HelloWorld\",\n        action=\"http://localhost:8080/axis2/services/HelloWorld\",\n        namespace=\"http://localhost:8080/axis2/services/HelloWorld\",\n        soap_ns=\"http://localhost:8080/axis2/services/HelloWorld\",\n        trace=True,\n        ns=\"ns0\"\n    )\n    #call the method\n    result = client.sayHello(\"Hello World\")\n    #print the result\n    print(result)\n"
+        ]
+    },
+    {
+        "id": "1",
+        "source": "soSearches",
+        "language": "python",
+        "query": "how to convert python currency usd to peso",
+        "snippets": [
+            "def main():\n    usd = float(input(\"Enter the amount in USD: \"))\n    peso = usd * 46.87\n    print(\"The amount in Peso is: \", peso)\n",
+            "def main():\n    usd = float(input(\"Enter the amount in US Dollars: \"))\n    peso = usd * 46.87\n    print(\"The amount in Pesos is: \", peso)\n",
+            "def convert_peso(usd):\n    peso = usd * 0.0089\n    return peso\n",
+            "def convert_peso(usd):\n    peso = usd * 50\n    return peso\n",
+            "def main():\n    usd = float(input(\"Enter the amount in USD: \"))\n    peso = usd * 63.00\n    print(\"The amount in Peso is: \", peso)\n",
+            "def convert_peso(usd):\n    peso = usd * 46.87\n    return peso\n"
+        ]
+    },
+    {
+        "id": "2",
+        "source": "soSearches",
+        "language": "python",
+        "query": "how to install mysql client to python 3.6 using pip",
+        "snippets": [
+            "def main():\n    import mysql.connector\n    mydb = mysql.connector.connect(\n        host=\"localhost\",\n        user=\"root\",\n        passwd=\"root\",\n        database=\"mydatabase\"\n    )\n    mycursor = mydb.cursor()\n    mycursor.execute(\"SELECT * FROM customers\")\n    myresult = mycursor.fetchall()\n    for x in myresult:\n        print(x)\n",
+            "def main():\n    import mysql.connector\n    mydb = mysql.connector.connect(\n        host=\"localhost\",\n        user=\"root\",\n        passwd=\"root\",\n        database=\"mydatabase\"\n    )\n    mycursor = mydb.cursor()\n    mycursor.execute(\"SELECT * FROM customers\")\n    myresult = mycursor.fetchall()\n    for x in myresult:\n        print(x)\n    mydb.close()\n",
+            "def main():\n    import mysql.connector\n    mydb = mysql.connector.connect(\n        host=\"localhost\",\n        user=\"root\",\n        passwd=\"\",\n        database=\"mydatabase\"\n    )\n    mycursor = mydb.cursor()\n    mycursor.execute(\"SELECT * FROM customers\")\n    myresult = mycursor.fetchall()\n    for x in myresult:\n        print(x)\n    mydb.close()\n",
+            "def main():\n    import mysql.connector\n    mydb = mysql.connector.connect(\n        host=\"localhost\",\n        user=\"root\",\n        passwd=\"\",\n        database=\"mydatabase\"\n    )\n    mycursor = mydb.cursor()\n    mycursor.execute(\"SELECT * FROM customers\")\n    myresult = mycursor.fetchall()\n    for x in myresult:\n        print(x)\n",
+            "def main():\n    print(\"Hello World\")\n    print(\"Hello Again\")\n    print(\"I like typing this.\")\n    print(\"This is fun.\")\n    print('Yay! Printing.')\n    print(\"I'd much rather you 'not'.\")\n    print('I \"said\" do not touch this.')\n",
+            "def main():\n    print(\"This program will calculate the area of a triangle\")\n    print()\n    base = float(input(\"Enter the base: \"))\n    height = float(input(\"Enter the height: \"))\n    area = 0.5 * base * height\n    print(\"The area of the triangle is\", area)\n"
+        ]
+    },
+    {
+        "id": "3",
+        "source": "soSearches",
+        "language": "python",
+        "query": "python how to alphanumerically sort an array of data",
+        "snippets": [
+            "def sort_array(array):\n    array.sort()\n    return array\n",
+            "def sort_array(arr):\n    #sort the array\n    arr.sort()\n    #print the array\n    print(arr)\n    #return the array\n    return arr\n",
+            "def sort_array(n):\n    return sorted(n, key=str)\n"
+        ]
+    },
+    {
+        "id": "4",
+        "source": "soSearches",
+        "language": "python",
+        "query": "how to avoid formattingg of the text in the slide of the ppt using python",
+        "snippets": [
+            "def main():\n    print(\"Hello World\")\n    print(\"Hello Again\")\n    print(\"I like typing this.\")\n    print(\"This is fun.\")\n    print('Yay! Printing.')\n    print(\"I'd much rather you 'not'.\")\n    print('I \"said\" do not touch this.')\n"
+        ]
+    },
+    {
+        "id": "5",
+        "source": "soSearches",
+        "language": "python",
+        "query": "how to count iteration of a while loop in python",
+        "snippets": [
+            "def main():\n    i = 0\n    while i < 10:\n        print(i)\n        i += 1\n    print(\"Done\")\n",
+            "def main():\n    i = 0\n    while i < 10:\n        print(i)\n        i += 1\n    print(\"Done with loop\")\n",
+            "def main():\n    count = 0\n    while count < 10:\n        print(count)\n        count += 1\n    print(\"Done with loop\")\n",
+            "def main():\n    count = 0\n    while count < 10:\n        print(count)\n        count += 1\n    print(\"Done with loop\")\n    print(\"Count is: \", count)\n"
+        ]
+    },
+    {
+        "id": "6",
+        "source": "soSearches",
+        "language": "python",
+        "query": "how to change text colour in python 3.7",
+        "snippets": [
+            "def main():\n    print(\"Hello World\")\n    print(\"Hello Again\")\n    print(\"I like typing this.\")\n    print(\"This is fun.\")\n    print('Yay! Printing.')\n    print(\"I'd much rather you 'not'.\")\n    print('I \"said\" do not touch this.')\n",
+            "def main():\n    print(\"Hello World\")\n    print(\"This is a test\")\n    print(\"This is another test\")\n    print(\"This is a third test\")\n    print(\"This is a fourth test\")\n    print(\"This is a fifth test\")\n    print(\"This is a sixth test\")\n    print(\"This is a seventh test\")\n    print(\"This is a eighth test\")\n    print(\"This is a ninth test\")\n    print(\"This is a tenth test\")\n    print(\"This is a eleventh test\")\n    print(\"This is a twelfth test\")\n    print(\"This is a thirteenth test\")\n    print(\"This is a fourteenth test\")\n    print(\"This is a fifteenth test\")\n    print(\"This is a sixteenth test\")\n    print(\"This is a seventeenth test\")\n    print(\"This is a eighteenth test\")\n    print(\"This is a nineteenth test\")\n    print(\"This is a twentieth test\")\n    print(\"This is a twenty-first test\")\n    print(\"This is a twenty-second test\")\n    print(\"This is a twenty-third test\")\n    print(\"This is a twenty-fourth test\")\n    print(\"This is a twenty-fifth test\")\n    print(\"This is a twenty-sixth test\")\n    print(\"This is a twenty-seventh test\")\n    print(\"This is a twenty-eighth test\")\n    print(\"This is a twenty-ninth test\")\n    print(\"This is a thirtieth test\")\n    print(\"This is a thirty-first test\")\n    print(\"This is a thirty-second test\")\n    print(\"This is a thirty-third test\")\n    print(\"This is a thirty-fourth test\")\n    print(\"This is a thirty-fifth test\")\n    print(\"This is a thirty-sixth test\")\n    print(\"This is a thirty-seventh test\")\n    print(\"This is a thirty-eighth test\")\n    print(\"This is a thirty-ninth test\")\n    print(\"This is a fourtieth test\")\n    print(\"This is a forty-first test\")\n    print(\"This is a forty-second test\")\n    print(\"This is a forty-third test\")\n",
+            "def main():\n    print(\"Hello World\")\n    print(\"This is a test\")\n    print(\"This is another test\")\n    print(\"This is a third test\")\n    print(\"This is a fourth test\")\n    print(\"This is a fifth test\")\n    print(\"This is a sixth test\")\n    print(\"This is a seventh test\")\n    print(\"This is a eighth test\")\n    print(\"This is a ninth test\")\n    print(\"This is a tenth test\")\n    print(\"This is a eleventh test\")\n    print(\"This is a twelfth test\")\n    print(\"This is a thirteenth test\")\n    print(\"This is a fourteenth test\")\n    print(\"This is a fifteenth test\")\n    print(\"This is a sixteenth test\")\n    print(\"This is a seventeenth test\")\n    print(\"This is a eighteenth test\")\n    print(\"This is a nineteenth test\")\n    print(\"This is a twentieth test\")\n    print(\"This is a twenty-first test\")\n    print(\"This is a twenty-second test\")\n    print(\"This is a twenty-third test\")\n    print(\"This is a twenty-fourth test\")\n    print(\"This is a twenty-fifth test\")\n    print(\"This is a twenty-sixth test\")\n    print(\"This is a twenty-seventh test\")\n    print(\"This is a twenty-eighth test\")\n    print(\"This is a twenty-ninth test\")\n    print(\"This is a thirtieth test\")\n    print(\"This is a thirty-first test\")\n    print(\"This is a thirty-second test\")\n    print(\"This is a thirty-third test\")\n    print(\"This is a thirty-fourth test\")\n    print(\"This is a thirty-fifth test\")\n    print(\"This is a thirty-sixth test\")\n    print(\"This is a thirty-seventh test\")\n    print(\"This is a thirty-eighth test\")\n    print(\"This is a thirty-ninth test\")\n    print(\"This is a fourty-first test\")\n    print(\"This is a fourty-second test\")\n    print(\"This is a fourty-third test\")\n    print(\"This is a fourty\n"
+        ]
+    },
+    {
+        "id": "7",
+        "source": "soSearches",
+        "language": "python",
+        "query": "how to say all odd numbers within a range in python",
+        "snippets": [
+            "def odd_numbers(start, end):\n    for i in range(start, end):\n        if i % 2 != 0:\n            print(i)\n",
+            "def odd_numbers(low, high):\n    for i in range(low, high + 1):\n        if i % 2 != 0:\n            print(i)\n",
+            "def odd_numbers(start, end):\n    for i in range(start, end+1):\n        if i % 2 != 0:\n            print(i)\n",
+            "def odd_numbers(lst):\n    for i in range(lst[0], lst[1]):\n        if i % 2 != 0:\n            print(i)\n",
+            "def odd_numbers(start, end):\n    for i in range(start, end):\n        if i % 2 == 1:\n            print(i)\n",
+            "def odd_numbers(low, high):\n    for i in range(low, high+1):\n        if i % 2 == 1:\n            print(i)\n",
+            "def odd_numbers(n):\n    for i in range(1, n, 2):\n        print(i)\n"
+        ]
+    },
+    {
+        "id": "8",
+        "source": "soSearches",
+        "language": "python",
+        "query": "how to trace the execution in python",
+        "snippets": [
+            "def add(a,b):\n    return a+b\n",
+            "def trace(f):\n    def g(x):\n        print(f, x)\n        return f(x)\n    return g\n"
+        ]
+    },
+    {
+        "id": "9",
+        "source": "soSearches",
+        "language": "python",
+        "query": "how to resize an image using python",
+        "snippets": [
+            "def resize(image, width=None, height=None, inter=cv2.INTER_AREA):\n    # initialize the dimensions of the image to be resized and\n    # grab the image size\n    dim = None\n    (h, w) = image.shape[:2]\n\n    # if both the width and height are None, then return the\n    # original image\n    if width is None and height is None:\n        return image\n\n    # check to see if the width is None\n    if width is None:\n        # calculate the ratio of the height and construct the\n        # dimensions\n        r = height / float(h)\n        dim = (int(w * r), height)\n    # otherwise, the height is None\n    else:\n        # calculate the ratio of the width and construct the\n        # dimensions\n        r = width / float(w)\n        dim = (width, int(h * r))\n\n    # resize the image\n    resized = cv2.resize(image, dim, interpolation=inter)\n\n    # return the resized image\n    return resized\n",
+            "def resize(img, width=None, height=None, inter=cv2.INTER_AREA):\n    # initialize the dimensions of the image to be resized and\n    # grab the image size\n    dim = None\n    (h, w) = img.shape[:2]\n\n    # if both the width and height are None, then return the\n    # original image\n    if width is None and height is None:\n        return img\n\n    # check to see if the width is None\n    if width is None:\n        # calculate the ratio of the height and construct the\n        # dimensions\n        r = height / float(h)\n        dim = (int(w * r), height)\n\n    # otherwise, the height is None\n    else:\n        # calculate the ratio of the width and construct the\n        # dimensions\n        r = width / float(w)\n        dim = (width, int(h * r))\n\n    # resize the image\n    resized = cv2.resize(img, dim, interpolation=inter)\n\n    # return the resized image\n    return resized\n",
+            "def resize(img, size):\n    \"\"\"\n    Resize an image to a given size.\n    \"\"\"\n    return img.resize(size, Image.ANTIALIAS)\n",
+            "def resize(img, size):\n    \"\"\"\n    Resize an image to the given size.\n    \"\"\"\n    return img.resize(size, Image.ANTIALIAS)\n",
+            "def resize(img, size):\n    \"\"\"Resize an image to the given size\"\"\"\n    return img.resize(size, Image.ANTIALIAS)\n",
+            "def main():\n    from PIL import Image\n    import os\n    import sys\n    #get the image from the command line\n    image_name = sys.argv[1]\n    #open the image\n    im = Image.open(image_name)\n    #get the size of the image\n    width, height = im.size\n    #resize the image\n    im = im.resize((width/2, height/2))\n    #save the image\n    im.save(image_name + '_resized.jpg')\n    #display the image\n    im.show()\n    #close the image\n    im.close()\n"
+        ]
+    }
+]

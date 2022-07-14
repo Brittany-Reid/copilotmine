@@ -625,8 +625,11 @@
     "source": "soSearches",
     "language": "python",
     "query": "[python] how to use of",
-    "snippets": [],
-    "results": 0
+    "snippets": [
+        "def of(x, y):\n    return x + y\n",
+        "def f1(a, b):\n    return a + b\n"
+    ],
+    "results": 2
 },{
     "id": "49",
     "source": "soSearches",
@@ -1408,8 +1411,12 @@
     "source": "soSearches",
     "language": "python",
     "query": "how to create queue in python",
-    "snippets": [],
-    "results": 0
+    "snippets": [
+        "def main():\n    q = Queue()\n    q.enqueue(1)\n    q.enqueue(2)\n    q.enqueue(3)\n    print(q.dequeue())\n    print(q.dequeue())\n    print(q.dequeue())\n    print(q.dequeue())\n    print(q.dequeue())\n",
+        "def main():\n    q = Queue()\n    q.enqueue(1)\n    q.enqueue(2)\n    q.enqueue(3)\n    q.enqueue(4)\n    q.enqueue(5)\n    q.enqueue(6)\n    q.enqueue(7)\n    q.enqueue(8)\n    q.enqueue(9)\n    q.enqueue(10)\n    q.enqueue(11)\n    q.enqueue(12)\n    q.enqueue(13)\n    q.enqueue(14)\n    q.enqueue(15)\n    q.enqueue(16)\n    q.enqueue(17)\n    q.enqueue(18)\n    q.enqueue(19)\n    q.enqueue(20)\n    q.enqueue(21)\n    q.enqueue(22)\n    q.enqueue(23)\n    q.enqueue(24)\n    q.enqueue(25)\n    q.enqueue(26)\n    q.enqueue(27)\n    q.enqueue(28)\n    q.enqueue(29)\n    q.enqueue(30)\n    q.enqueue(31)\n    q.enqueue(32)\n    q.enqueue(33)\n    q.enqueue(34)\n    q.enqueue(35)\n    q.enqueue(36)\n    q.enqueue(37)\n    q.enqueue(38)\n    q.enqueue(39)\n    q.enqueue(40)\n    q.enqueue(41)\n    q.enqueue(42)\n    q.enqueue(43)\n    q.enqueue(44)\n    q.enqueue(45)\n    q.enqueue(46)\n    q.enqueue(47)\n    q.enqueue(48)\n    q.enqueue(49)\n    q.enqueue(50)\n    q.enqueue(51)\n    q.enqueue(52)\n    q.enqueue(53)\n    q.enqueue(54)\n    q.\n",
+        "def main():\n    queue = [1,2,3,4,5]\n    print(queue)\n    queue.append(6)\n    print(queue)\n    queue.pop(0)\n    print(queue)\n    queue.insert(0,7)\n    print(queue)\n    queue.remove(7)\n    print(queue)\n    queue.reverse()\n    print(queue)\n    queue.sort()\n    print(queue)\n    queue.clear()\n    print(queue)\n    queue.append(1)\n    print(queue)\n    queue.append(2)\n    print(queue)\n    queue.append(3)\n    print(queue)\n    queue.append(4)\n    print(queue)\n    queue.append(5)\n    print(queue)\n    queue.append(6)\n    print(queue)\n    queue.append(7)\n    print(queue)\n    queue.append(8)\n    print(queue)\n    queue.append(9)\n    print(queue)\n    queue.append(10)\n    print(queue)\n    queue.append(11)\n    print(queue)\n    queue.append(12)\n    print(queue)\n    queue.append(13)\n    print(queue)\n    queue.append(14)\n    print(queue)\n    queue.append(15)\n    print(queue)\n    queue.append(16)\n    print(queue)\n    queue.append(17)\n    print(queue)\n    queue.append(18)\n    print(queue)\n    queue.append(19)\n    print(queue)\n    queue.append(20)\n    print(queue)\n    queue.append(21)\n    print(queue)\n    queue.append(22)\n    print(queue)\n    queue.append(23)\n    print(queue)\n    queue.append(24)\n    print(queue)\n    queue.append(25)\n    print(queue)\n    queue.append(26)\n    print(queue)\n    queue.append(27)\n    print(queue)\n    queue.\n"
+    ],
+    "results": 5
 },{
     "id": "106",
     "source": "soSearches",
@@ -1797,8 +1804,11 @@
     "source": "soSearches",
     "language": "python",
     "query": "how to express and in python",
-    "snippets": [],
-    "results": 0
+    "snippets": [
+        "def main():\n    # print(\"Hello World\")\n    # print(\"Hello World\", end=\"\")\n    # print(\"Hello World\", end=\"\\n\")\n    # print(\"Hello World\", end=\"\\n\\n\")\n    # print(\"Hello World\", end=\"\\n\\n\\n\")\n    # print(\"Hello World\", end=\"\\n\\n\\n\\n\")\n    # print(\"Hello World\", end=\"\\n\\n\\n\\n\\n\")\n    # print(\"Hello World\", end=\"\\n\\n\\n\\n\\n\\n\")\n    # print(\"Hello World\", end=\"\\n\\n\\n\\n\\n\\n\\n\")\n    # print(\"Hello World\", end=\"\\n\\n\\n\\n\\n\\n\\n\\n\")\n    # print(\"Hello World\", end=\"\\n\\n\\n\\n\\n\\n\\n\\n\\n\")\n    # print(\"Hello World\", end=\"\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\")\n    # print(\"Hello World\", end=\"\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\")\n    # print(\"Hello World\", end=\"\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\")\n    # print(\"Hello World\", end=\"\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\")\n    # print(\"Hello World\", end=\"\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\")\n    # print(\"Hello World\", end=\"\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\")\n    # print(\"Hello World\", end=\"\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\")\n    # print(\"Hello World\", end=\"\\n\\n\\n\\n\\n\\n\\n\\n\\n\\n\n",
+        "def main():\n    print(\"This is a simple calculator\")\n    print(\"Enter 'q' to quit\")\n    print(\"Enter 'c' to clear\")\n    print(\"Enter 'p' to print\")\n    print(\"Enter 's' to save\")\n    print(\"Enter 'l' to load\")\n    print(\"Enter 'h' to help\")\n    print(\"Enter 'v' to view\")\n    print(\"Enter 'e' to exit\")\n    print(\"Enter 'r' to reset\")\n    print(\"Enter 'a' to add\")\n    print(\"Enter 's' to subtract\")\n    print(\"Enter 'm' to multiply\")\n    print(\"Enter 'd' to divide\")\n    print(\"Enter 't' to take the square root\")\n    print(\"Enter 'c' to take the cube root\")\n    print(\"Enter 'f' to take the factorial\")\n    print(\"Enter 'g' to take the power\")\n    print(\"Enter 'o' to take the modulus\")\n    print(\"Enter 'b' to take the logarithm\")\n    print(\"Enter 'i' to take the inverse\")\n    print(\"Enter 'x' to take the exponent\")\n    print(\"Enter 'y' to take the quotient\")\n    print(\"Enter 'z' to take the remainder\")\n    print(\"Enter 'j' to take the sinus\")\n    print(\"Enter 'k' to take the cosinus\")\n    print(\"Enter 'l' to take the tangens\")\n    print(\"Enter 'n' to take the cotangens\")\n    print(\"Enter 'q' to take the secans\")\n    print(\"Enter 'w' to take the cosecans\")\n    print(\"Enter 'e' to take the sinh\")\n    print(\"Enter 'r' to take the cosh\")\n    print(\"Enter 't' to take the tanh\")\n    print(\"Enter 'y' to take the coth\")\n    print(\"Enter 'u' to take the sech\")\n    print(\"Enter 'i' to take the cosech\")\n    print(\"Enter 'o' to take the sinus hyperbolicus\")\n    print(\"Enter 'p' to take the cosinus hyperb\n"
+    ],
+    "results": 5
 },{
     "id": "135",
     "source": "soSearches",
@@ -3116,8 +3126,14 @@
     "source": "soSearches",
     "language": "python",
     "query": "how to pass parquet tables in python",
-    "snippets": [],
-    "results": 0
+    "snippets": [
+        "def main():\n    import pandas as pd\n    import pyarrow as pa\n    import pyarrow.parquet as pq\n\n    # read in the parquet file\n    df = pd.read_parquet('data/parquet/parquet-example.parquet')\n    # convert to pyarrow table\n    table = pa.Table.from_pandas(df)\n    # write to parquet\n    pq.write_table(table, 'data/parquet/parquet-example-out.parquet')\n    # read in the parquet file\n    df = pd.read_parquet('data/parquet/parquet-example-out.parquet')\n    # convert to pyarrow table\n    table = pa.Table.from_pandas(df)\n    # write to parquet\n    pq.write_table(table, 'data/parquet/parquet-example-out-2.parquet')\n    # read in the parquet file\n    df = pd.read_parquet('data/parquet/parquet-example-out-2.parquet')\n    # convert to pyarrow table\n    table = pa.Table.from_pandas(df)\n    # write to parquet\n    pq.write_table(table, 'data/parquet/parquet-example-out-3.parquet')\n    # read in the parquet file\n    df = pd.read_parquet('data/parquet/parquet-example-out-3.parquet')\n    # convert to pyarrow table\n    table = pa.Table.from_pandas(df)\n    # write to parquet\n    pq.write_table(table, 'data/parquet/parquet-example-out-4.parquet')\n    # read in the parquet file\n    df = pd.read_parquet('data/parquet/parquet-example-out-4.parquet')\n    # convert to pyarrow table\n    table = pa.Table.from_pandas(df)\n    # write to parquet\n    pq.write_table(table, 'data/parquet/par\n",
+        "def main():\n    import pandas as pd\n    import numpy as np\n    import pyarrow as pa\n    import pyarrow.parquet as pq\n    import os\n    import sys\n    import argparse\n\n    parser = argparse.ArgumentParser(description='Pass parquet table to python')\n    parser.add_argument('-f', '--file', help='parquet file', required=True)\n    parser.add_argument('-t', '--table', help='table name', required=True)\n    parser.add_argument('-c', '--columns', help='columns to return', required=True)\n    parser.add_argument('-o', '--output', help='output file', required=True)\n    args = parser.parse_args()\n\n    # read in the parquet file\n    table = pq.read_table(args.file)\n    # get the columns we want\n    columns = args.columns.split(',')\n    # get the dataframe\n    df = table.to_pandas(columns=columns)\n    # write to a csv\n    df.to_csv(args.output, index=False)\n    # write to a parquet\n    # df.to_parquet(args.output)\n    # write to a parquet with a schema\n    # schema = pa.schema([pa.field('id', pa.int64()), pa.field('name', pa.string())])\n    # table = pa.Table.from_pandas(df, schema=schema)\n    # pq.write_table(table, args.output)\n    # write to a parquet with a schema and a compression type\n    # schema = pa.schema([pa.field('id', pa.int64()), pa.field('name', pa.string())])\n    # table = pa.Table.from_pandas(df, schema=schema)\n    # pq.write_table(table, args.output, compression='snappy')\n    # write to a parquet with a schema and a compression type and a compression level\n    # schema = pa.schema([pa.field\n",
+        "def main():\n    import pandas as pd\n    import pyarrow as pa\n    import pyarrow.parquet as pq\n    import os\n    import sys\n    import argparse\n\n    parser = argparse.ArgumentParser(description='Pass parquet table to python')\n    parser.add_argument('-f', '--file', help='parquet file', required=True)\n    parser.add_argument('-t', '--table', help='table name', required=True)\n    parser.add_argument('-c', '--columns', help='columns to return', required=True)\n    args = parser.parse_args()\n\n    # read parquet file\n    table = pq.read_table(args.file)\n    # get columns\n    columns = args.columns.split(',')\n    # get dataframe\n    df = table.to_pandas()\n    # return columns\n    print(df[columns])\n    return df[columns]\n",
+        "def main():\n    import pandas as pd\n    import pyarrow as pa\n    import pyarrow.parquet as pq\n    import os\n    import sys\n    import argparse\n    import json\n    import time\n    import datetime\n    import numpy as np\n    import matplotlib.pyplot as plt\n    import seaborn as sns\n    import pandas_profiling as pp\n    import plotly.graph_objects as go\n    import plotly.express as px\n    import plotly.io as pio\n    import plotly.offline as py\n    import plotly.tools as tls\n    import plotly.figure_factory as ff\n    import plotly.express as px\n    import plotly.graph_objects as go\n    import plotly.io as pio\n    import plotly.offline as py\n    import plotly.tools as tls\n    import plotly.figure_factory as ff\n    import plotly.express as px\n    import plotly.graph_objects as go\n    import plotly.io as pio\n    import plotly.offline as py\n    import plotly.tools as tls\n    import plotly.figure_factory as ff\n    import plotly.express as px\n    import plotly.graph_objects as go\n    import plotly.io as pio\n    import plotly.offline as py\n    import plotly.tools as tls\n    import plotly.figure_factory as ff\n    import plotly.express as px\n    import plotly.graph_objects as go\n    import plotly.io as pio\n    import plotly.offline as py\n    import plotly.tools as tls\n    import plotly.figure_factory as ff\n    import plotly.express as px\n    import plotly.graph_objects as go\n    import plotly.io as pio\n    import plotly.offline as py\n    import plotly.tools as tls\n    import plotly.figure_factory as ff\n    import plotly.express as px\n    import plotly.graph_objects as go\n    import plotly.io as\n",
+        "def main():\n    import pandas as pd\n    import pyarrow.parquet as pq\n    import pyarrow as pa\n    import pyarrow.platform_compat as plt_compat\n    import pyarrow.formatting as fmt\n    import pyarrow.lib\n\n    # read in the parquet file\n    df = pd.read_parquet('/tmp/test.parquet')\n    print(df)\n\n    # create a pyarrow table\n    table = pa.Table.from_pandas(df)\n    print(table)\n\n    # write the table to a parquet file\n    pq.write_table(table, '/tmp/test_out.parquet')\n\n    # read in the parquet file\n    df = pd.read_parquet('/tmp/test_out.parquet')\n    print(df)\n"
+    ],
+    "results": 5
 },{
     "id": "230",
     "source": "soSearches",
@@ -3231,8 +3247,11 @@
     "source": "soSearches",
     "language": "python",
     "query": "how to get a value from a dictionary python 33.6",
-    "snippets": [],
-    "results": 0
+    "snippets": [
+        "def main():\n    dict = {'a':1, 'b':2, 'c':3}\n    print(dict['a'])\n    print(dict.get('a'))\n    print(dict.get('d'))\n    print(dict.get('d', 'Not found'))\n    print(dict.get('d', None))\n    print(dict.get('d', 'Not found').upper())\n    print(dict.get('d', 'Not found').upper() if dict.get('d', 'Not found') else 'Not found')\n    print(dict.get('d', 'Not found').upper() if dict.get('d', 'Not found') else 'Not found')\n    print(dict.get('d', 'Not found').upper() if dict.get('d', 'Not found') else 'Not found')\n    print(dict.get('d', 'Not found').upper() if dict.get('d', 'Not found') else 'Not found')\n    print(dict.get('d', 'Not found').upper() if dict.get('d', 'Not found') else 'Not found')\n    print(dict.get('d', 'Not found').upper() if dict.get('d', 'Not found') else 'Not found')\n    print(dict.get('d', 'Not found').upper() if dict.get('d', 'Not found') else 'Not found')\n    print(dict.get('d', 'Not found').upper() if dict.get('d', 'Not found') else 'Not found')\n    print(dict.get('d', 'Not found').upper() if dict.get('d', 'Not found') else 'Not found')\n    print(dict.get('d', 'Not found').upper() if dict.get('d', 'Not found') else 'Not found')\n    print(dict.get('d', 'Not found').upper() if dict.get('d', 'Not found') else 'Not found')\n    print(dict.get('d', 'Not found').upper() if dict.get('d', 'Not found') else 'Not found')\n    print(dict.get('d', 'Not found').upper() if dict.\n",
+        "def main():\n    # create a dictionary\n    my_dict = {'name': 'Chris', 'city': 'Seattle', 'cake': 'chocolate'}\n    # use the get() method to retrieve a value\n    print(my_dict.get('name'))\n    print(my_dict.get('city'))\n    print(my_dict.get('cake'))\n    print(my_dict.get('fruit', 'Not Found'))\n    # use the get() method to retrieve a value\n    print(my_dict.get('name'))\n    print(my_dict.get('city'))\n    print(my_dict.get('cake'))\n    print(my_dict.get('fruit', 'Not Found'))\n    # use the get() method to retrieve a value\n    print(my_dict.get('name'))\n    print(my_dict.get('city'))\n    print(my_dict.get('cake'))\n    print(my_dict.get('fruit', 'Not Found'))\n    # use the get() method to retrieve a value\n    print(my_dict.get('name'))\n    print(my_dict.get('city'))\n    print(my_dict.get('cake'))\n    print(my_dict.get('fruit', 'Not Found'))\n    # use the get() method to retrieve a value\n    print(my_dict.get('name'))\n    print(my_dict.get('city'))\n    print(my_dict.get('cake'))\n    print(my_dict.get('fruit', 'Not Found'))\n    # use the get() method to retrieve a value\n    print(my_dict.get('name'))\n    print(my_dict.get('city'))\n    print(my_dict.get('cake'))\n    print(my_dict.get('fruit', 'Not Found'))\n    # use the get() method to retrieve a value\n    print(my_dict.get('name'))\n    print(my_dict.get('city'))\n    print(my_dict.get('cake'))\n    print(my\n"
+    ],
+    "results": 2
 },{
     "id": "238",
     "source": "soSearches",
@@ -5752,8 +5771,11 @@
     "source": "soSearches",
     "language": "java",
     "query": "how to use format java class",
-    "snippets": [],
-    "results": 0
+    "snippets": [
+        "\tstatic void main(String[] args){\n\t\tSystem.out.printf(\"%s %s %s\", \"Hello\", \"World\", \"!\");\n\t}\n}\n",
+        "\tstatic void main(String[] args){\n\t\tSystem.out.println(\"Hello World\");\n\t\tSystem.out.printf(\"%s %s %s\", \"Hello\", \"World\", \"!\");\n\t}\n}\n"
+    ],
+    "results": 2
 },{
     "id": "421",
     "source": "soSearches",

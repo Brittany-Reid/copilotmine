@@ -64,17 +64,17 @@ function activate(context) {
 		var lines = file.split("\n")
 		var row = 0;
 		var queries = [];
-		var start = 380;
-		var end = start + 10;
+		var start = 1;
+		// var end = start + 10;
 		for(var l of lines){
 			if(row < start){
 				row++;
 				continue;
 			}
-			//do first 10
-			if(row >= end){
-				break;
-			}
+			// //do first 10
+			// if(row >= end){
+			// 	break;
+			// }
 			l = l.trim()
 			var columns = l.split("\t");
 			var query = {
@@ -138,13 +138,13 @@ function activate(context) {
 			}
 
 			//focus the text editor again
-			return vscode.window.showTextDocument(textEditor.document, { preview: false, viewColumn: textEditor.viewColumn, })
+			return vscode.window.showTextDocument(textEditor.document, { preview: false, viewColumn: textEditor.viewColumn})
 		}
 
 		function getSnippets(query, lang){
 
 			//get active editor
-			const editor = vscode.window.activeTextEditor;
+			var editor = vscode.window.activeTextEditor;
 			if(!editor){
 				vscode.window.showErrorMessage("Editor does not exist!");
 				return;
@@ -152,6 +152,7 @@ function activate(context) {
 			if(editor.document.fileName === "GitHub Copilot"){
 				console.log("bad things happened")
 				focusNonPilot();
+				editor = vscode.window.activeTextEditor;
 			}
 
 			var snippet;

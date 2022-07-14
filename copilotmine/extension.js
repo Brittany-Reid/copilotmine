@@ -59,12 +59,12 @@ function activate(context) {
 	// The commandId parameter must match the command field in package.json
 	let disposable = vscode.commands.registerCommand('copilotmine.mine', function () {
 		//tab seperated querys
-		var dataPath = getDataPath("all_queries.csv", context);
+		var dataPath = getDataPath("all-queries.csv", context);
 		var file = fs.readFileSync(dataPath, 'utf8');
 		var lines = file.split("\n")
 		var row = 0;
 		var queries = [];
-		var start = 1;
+		var start = 1539;
 		// var end = start + 10;
 		for(var l of lines){
 			if(row < start){
@@ -194,7 +194,7 @@ function activate(context) {
 			});
         }
 
-		var snippetPath = getDataPath("snippets.json", context);
+		var snippetPath = getDataPath("snippetsrest.json", context);
 		if(!fs.existsSync(snippetPath)){
 			fs.writeFileSync(snippetPath, "[\n");
 		}

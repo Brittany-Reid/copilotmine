@@ -6,6 +6,11 @@ const path = require('path');
 var copilot =  vscode.extensions.getExtension('Github.copilot');
 const TIMEOUT = 20000;
 
+//get signatures
+const SIGMODE = true;
+//use imports in signatures
+const IMPORTS = true;
+
 /**
  * Given a comment or query, formats a partial Python snippet for inserting in the format:
  * 	#{comment}
@@ -13,7 +18,10 @@ const TIMEOUT = 20000;
  * @param {string} comment The comment or query string to use.
  * @returns {string} The formatted snippet.
  */
-function formatPythonSnippet(comment){
+function formatPythonSnippet(q){
+	var comment = q.query
+	var sig = JSON.parse(q.signature)
+	console.log(sig)
 	var snippet = "# " + comment + "\n";
 	snippet+="def";
 	return snippet;
@@ -27,7 +35,8 @@ function formatPythonSnippet(comment){
  * @param {string} comment The comment or query string to use.
  * @returns {string} The formatted snippet.
  */
- function formatJavaSnippet(comment){
+ function formatJavaSnippet(q){
+	var comment = q.query
 	var snippet = "//" + comment + "\n";
 	snippet+="public class Clazz{\n";
 	snippet+="\tpublic\n";
@@ -60,21 +69,23 @@ function activate(context) {
 	let disposable = vscode.commands.registerCommand('copilotmine.mine', function () {
 		//tab seperated querys
 		var dataPath = getDataPath("all-queries.csv", context);
+		if(SIGMODE)
+			dataPath = getDataPath("queries-sigs.csv", context);
 		var file = fs.readFileSync(dataPath, 'utf8');
 		var lines = file.split("\n")
 		var row = 0;
 		var queries = [];
-		var start = 1539;
-		// var end = start + 10;
+		var start = 0;
+		var end = start + 1;
 		for(var l of lines){
 			if(row < start){
 				row++;
 				continue;
 			}
-			// //do first 10
-			// if(row >= end){
-			// 	break;
-			// }
+			//do first 10
+			if(row >= end){
+				break;
+			}
 			l = l.trim()
 			var columns = l.split("\t");
 			var query = {
@@ -82,6 +93,7 @@ function activate(context) {
 				source: columns[1],
 				language: columns[2],
 				query: columns[3],
+				signature: columns[6],
 				snippets: []
 			}
 			// 	row++;
@@ -141,8 +153,8 @@ function activate(context) {
 			return vscode.window.showTextDocument(textEditor.document, { preview: false, viewColumn: textEditor.viewColumn})
 		}
 
-		function getSnippets(query, lang){
-
+		function getSnippets(q){
+			var lang = q.language
 			//get active editor
 			var editor = vscode.window.activeTextEditor;
 			if(!editor){
@@ -160,9 +172,9 @@ function activate(context) {
 				// the langauge info does actually matter, otherwise we get odd results
 				vscode.languages.setTextDocumentLanguage(editor.document, lang).then(()=>{
 					if(lang === "python")
-						snippet = formatPythonSnippet(query);
+						snippet = formatPythonSnippet(q);
 					else{
-						snippet = formatJavaSnippet(query);
+						snippet = formatJavaSnippet(q);
 					}
 					editor.edit(editBuilder => {
 						var range = getRangeOfAll(editor);
@@ -202,9 +214,7 @@ function activate(context) {
 		function doQuery(i){
 			var q = queries[i]
 			console.log(q.id);
-			var text = q.query;
-			var lang = q.language;
-			getSnippets(text, lang).then(snippets => {
+			getSnippets(q).then(snippets => {
 				var number =snippets[0];
 				number = number.split("Synthesizing ")[1]
 				number = parseInt(number.split("/")[0])

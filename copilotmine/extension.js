@@ -8,8 +8,8 @@ const TIMEOUT = 20000;
 
 //get signatures
 const SIGMODE = true;
-//use imports in signatures
-const IMPORTS = true;
+// //use imports in signatures
+// const IMPORTS = true;
 
 /**
  * Given a comment or query, formats a partial Python snippet for inserting in the format:
@@ -21,9 +21,8 @@ const IMPORTS = true;
 function formatPythonSnippet(q){
 	var comment = q.query
 	var sig = JSON.parse(q.signature)
-	console.log(sig)
 	var snippet = "# " + comment + "\n";
-	snippet+="def";
+	snippet+=sig;
 	return snippet;
 }
 
@@ -37,9 +36,10 @@ function formatPythonSnippet(q){
  */
  function formatJavaSnippet(q){
 	var comment = q.query
+	var sig = JSON.parse(q.signature)
 	var snippet = "//" + comment + "\n";
 	snippet+="public class Clazz{\n";
-	snippet+="\tpublic\n";
+	snippet+="\t" + sig +"\n"
 	return snippet;
 }
 
@@ -75,17 +75,17 @@ function activate(context) {
 		var lines = file.split("\n")
 		var row = 0;
 		var queries = [];
-		var start = 0;
-		var end = start + 1;
+		var start = 1;
+		// var end = start + 1;
 		for(var l of lines){
 			if(row < start){
 				row++;
 				continue;
 			}
 			//do first 10
-			if(row >= end){
-				break;
-			}
+			// if(row >= end){
+			// 	break;
+			// }
 			l = l.trim()
 			var columns = l.split("\t");
 			var query = {

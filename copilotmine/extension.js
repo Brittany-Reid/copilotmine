@@ -7,7 +7,8 @@ var copilot =  vscode.extensions.getExtension('Github.copilot');
 const TIMEOUT = 20000;
 
 //get signatures
-const SIGMODE = true;
+const SIGMODE = false;
+const KEYWORDS = true;
 // //use imports in signatures
 // const IMPORTS = true;
 
@@ -20,9 +21,17 @@ const SIGMODE = true;
  */
 function formatPythonSnippet(q){
 	var comment = q.query
-	var sig = JSON.parse(q.signature)
+	if(KEYWORDS)
+		comment = q.keywords
+	var sig = null
 	var snippet = "# " + comment + "\n";
-	snippet+=sig;
+	if(SIGMODE){
+		sig = JSON.parse(q.signature)
+		snippet+=sig;
+	}
+	else{
+		snippet+="def ";
+	}
 	return snippet;
 }
 
@@ -36,10 +45,18 @@ function formatPythonSnippet(q){
  */
  function formatJavaSnippet(q){
 	var comment = q.query
-	var sig = JSON.parse(q.signature)
+	if(KEYWORDS)
+		comment = q.keywords
+	var sig = null
 	var snippet = "//" + comment + "\n";
 	snippet+="public class Clazz{\n";
-	snippet+="\t" + sig +"\n"
+	if(SIGMODE){
+		sig = JSON.parse(q.signature)
+		snippet+="\t" + sig +"\n"
+	}
+	else{
+		snippet += "\tpublic ";
+	}
 	return snippet;
 }
 
@@ -71,18 +88,20 @@ function activate(context) {
 		var dataPath = getDataPath("all-queries.csv", context);
 		if(SIGMODE)
 			dataPath = getDataPath("queries-sigs.csv", context);
+		if(KEYWORDS)
+			dataPath = getDataPath("queries-keywords.csv", context);
 		var file = fs.readFileSync(dataPath, 'utf8');
 		var lines = file.split("\n")
 		var row = 0;
 		var queries = [];
 		var start = 1;
-		// var end = start + 1;
+		// var end = start + 5;
 		for(var l of lines){
 			if(row < start){
 				row++;
 				continue;
 			}
-			//do first 10
+			// // do first 10
 			// if(row >= end){
 			// 	break;
 			// }
@@ -93,9 +112,12 @@ function activate(context) {
 				source: columns[1],
 				language: columns[2],
 				query: columns[3],
-				signature: columns[6],
-				snippets: []
 			}
+			if(SIGMODE)
+				query["signature"] = columns[6]
+			if(KEYWORDS)
+				query["keywords"] = columns[6]
+			query["snippets"] = [];
 			// 	row++;
 			// 	continue;
 			// }

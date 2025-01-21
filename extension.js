@@ -4,11 +4,11 @@ const vscode = require('vscode');
 const fs = require('fs');
 const path = require('path');
 var copilot =  vscode.extensions.getExtension('Github.copilot');
-const TIMEOUT = 20000;
+const TIMEOUT = 2000;
 
 //get signatures
 const SIGMODE = false;
-const KEYWORDS = true;
+const KEYWORDS = false;
 // //use imports in signatures
 // const IMPORTS = true;
 
@@ -203,21 +203,26 @@ function activate(context) {
 						editBuilder.replace(range, snippet);
 					}).then(function(){
 						var range = getRangeOfAll(editor);
-						callCommand('github.copilot.openPanelForRange', range).then(()=>{
+						callCommand('github.copilot.openLogs');
+						callCommand('github.copilot.generate', range).then(()=>{
 							//wait some time to get results
 							return setTimeout(function(){
-								var editors = vscode.window.visibleTextEditors;
-								for(var e of editors){
-									if(e.document.fileName == 'GitHub Copilot'){
-										var results = e.document.getText();
-										results = results.split("\n=======\n\n");
-									}
-								}
-								focusNonPilot().then(()=>{
-									resolve(results);
-								})
+								// var editors = vscode.window.visibleTextEditors;
+								// for(var e of editors){
+								// 	console.log(e.document.fileName)
+								// }
+								// 	if(e.document.fileName == 'GitHub Copilot'){
+								// 		var results = e.document.getText();
+								// 		console.log(results)
+								// 		// results = results.split("\n=======\n\n");
+								// 	}
+								// }
+								// focusNonPilot().then(()=>{
+								// 	resolve(results);
+								// })
+								resolve();
 								
-							}, TIMEOUT);
+							}, 10000);
 						})
 					// 	//this catches errors in other parts of the program :/
 					// 	.then(undefined, err => {

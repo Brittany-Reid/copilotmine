@@ -101,10 +101,18 @@ function processLog(log){
 			continue
 		}
 		if(currentSnippet.length > 0 && l.includes("finish reason: [stop]")){
+			if(currentSnippet.trim().endsWith("]"))
+				currentSnippet = currentSnippet.trim().substring(0, currentSnippet.length - 2) +"\n";
 			snippets.push(currentSnippet);
 			currentSnippet = "";
 			continue
 		}
+		if(currentSnippet.length > 0 && l.includes("[info] [streamChoices] request done: headerRequestId:")){
+			snippets.push(currentSnippet);
+			currentSnippet = "";
+			continue
+		}
+	
 		if(currentSnippet !== ""){
 			currentSnippet += l+"\n";
 		}

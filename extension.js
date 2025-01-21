@@ -4,13 +4,15 @@ const vscode = require('vscode');
 const fs = require('fs');
 const path = require('path');
 var copilot =  vscode.extensions.getExtension('Github.copilot');
-const TIMEOUT = 2000;
+const TIMEOUT = 20000;
 
-//get signatures
+//which file to use
 const SIGMODE = false;
 const KEYWORDS = false;
 // //use imports in signatures
 // const IMPORTS = true;
+
+var storedLog = "";
 
 /**
  * Given a comment or query, formats a partial Python snippet for inserting in the format:
@@ -72,6 +74,47 @@ function getDataPath(file, context){
 	return context.asAbsolutePath(path.join('data', file));
 }
 
+function getLog(){
+	var log_path = "../../../Roaming/Code/logs";
+	var sessions = fs.readdirSync(log_path)
+	var latestSession = sessions[sessions.length - 1];
+	var windows = fs.readdirSync(log_path + "/" + latestSession)
+	var latestWindow = 0
+	for(var w of windows){
+		var n = parseInt(w.replace("window", ""))
+		if(n > latestWindow){
+			latestWindow = n
+		}
+	}
+	latestWindow = "window" + latestWindow;
+
+	return log_path + "/" + latestSession + "/" + latestWindow + "/exthost/Github.Copilot/GitHub Copilot.log";
+}
+
+function processLog(log){
+	var snippets = []
+	var currentSnippet = ""
+	var lines = log.split("\n");
+	for(var l of lines){
+		if(l.includes("[info] [solutions] Open Copilot completion: [")){
+			currentSnippet += l.split("[info] [solutions] Open Copilot completion: [")[1]+"\n";
+			continue
+		}
+		if(currentSnippet.length > 0 && l.includes("finish reason: [stop]")){
+			snippets.push(currentSnippet);
+			currentSnippet = "";
+			continue
+		}
+		if(currentSnippet !== ""){
+			currentSnippet += l+"\n";
+		}
+	}
+	if(currentSnippet !== ""){
+		snippets.push(currentSnippet);
+	}
+	return snippets
+}
+
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 
@@ -84,8 +127,10 @@ function activate(context) {
 	// Now provide the implementation of the command with  registerCommand
 	// The commandId parameter must match the command field in package.json
 	let disposable = vscode.commands.registerCommand('copilotmine.mine', function () {
+		var logPath = getLog();
+		console.log(logPath);
 		//tab seperated querys
-		var dataPath = getDataPath("all-queries.csv", context);
+		var dataPath = getDataPath("queries-all.csv", context);
 		if(SIGMODE)
 			dataPath = getDataPath("queries-sigs.csv", context);
 		if(KEYWORDS)
@@ -204,9 +249,14 @@ function activate(context) {
 					}).then(function(){
 						var range = getRangeOfAll(editor);
 						callCommand('github.copilot.openLogs');
+						//save log before gen
+						previousLog = fs.readFileSync(logPath, 'utf8');
 						callCommand('github.copilot.generate', range).then(()=>{
 							//wait some time to get results
 							return setTimeout(function(){
+								//get log after gen
+								var currentLog = fs.readFileSync(logPath, 'utf8').substring(previousLog.length);
+								var results = processLog(currentLog);
 								// var editors = vscode.window.visibleTextEditors;
 								// for(var e of editors){
 								// 	console.log(e.document.fileName)
@@ -217,12 +267,11 @@ function activate(context) {
 								// 		// results = results.split("\n=======\n\n");
 								// 	}
 								// }
-								// focusNonPilot().then(()=>{
-								// 	resolve(results);
-								// })
-								resolve();
+								focusNonPilot().then(()=>{
+									resolve(results);
+								})
 								
-							}, 10000);
+							}, TIMEOUT);
 						})
 					// 	//this catches errors in other parts of the program :/
 					// 	.then(undefined, err => {
@@ -233,22 +282,21 @@ function activate(context) {
 			});
         }
 
-		var snippetPath = getDataPath("snippetsrest.json", context);
+		var snippetPath = getDataPath("snippets.json", context);
 		if(!fs.existsSync(snippetPath)){
-			fs.writeFileSync(snippetPath, "[\n");
+			fs.writeFileSync(snippetPath, "[\n"); 
 		}
 
 		function doQuery(i){
 			var q = queries[i]
 			console.log(q.id);
 			getSnippets(q).then(snippets => {
-				var number =snippets[0];
-				number = number.split("Synthesizing ")[1]
-				number = parseInt(number.split("/")[0])
+				// var number =snippets[0];
+				// number = number.split("Synthesizing ")[1]
+				// number = parseInt(number.split("/")[0])
 
-				snippets = snippets.slice(1, snippets.length)
+				// snippets = snippets.slice(1, snippets.length)
 				q.snippets = snippets;
-				q.results = number;
 				fs.appendFileSync(snippetPath, JSON.stringify(q, undefined, 4) + ",");
 				if(i < queries.length - 1){
 					doQuery(i+1);

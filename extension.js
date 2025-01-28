@@ -8,7 +8,7 @@ const TIMEOUT = 20000;
 
 //which file to use
 const SIGMODE = false;
-const KEYWORDS = false;
+const KEYWORDS = true;
 // //use imports in signatures
 // const IMPORTS = true;
 
@@ -101,13 +101,19 @@ function processLog(log){
 			continue
 		}
 		if(currentSnippet.length > 0 && l.includes("finish reason: [stop]")){
-			if(currentSnippet.trim().endsWith("]"))
-				currentSnippet = currentSnippet.trim().substring(0, currentSnippet.length - 2) +"\n";
+			if(currentSnippet.trim().endsWith("]")){
+				currentSnippet = currentSnippet.trim();
+				currentSnippet = currentSnippet.substring(0, currentSnippet.length - 1);
+			}
 			snippets.push(currentSnippet);
 			currentSnippet = "";
 			continue
 		}
 		if(currentSnippet.length > 0 && l.includes("[info] [streamChoices] request done: headerRequestId:")){
+			if(currentSnippet.trim().endsWith("]")){
+				currentSnippet = currentSnippet.trim();
+				currentSnippet = currentSnippet.substring(0, currentSnippet.length - 1);
+			}
 			snippets.push(currentSnippet);
 			currentSnippet = "";
 			continue
@@ -147,9 +153,11 @@ function activate(context) {
 		var lines = file.split("\n")
 		var row = 0;
 		var queries = [];
-		var start = 1;
+		var start = 1768;
+		// start = 1492;
 		// var end = start + 5;
 		for(var l of lines){
+			if(!l || l === "") continue;
 			if(row < start){
 				row++;
 				continue;

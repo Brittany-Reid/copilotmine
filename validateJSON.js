@@ -1,6 +1,6 @@
 const fs = require("fs");
 console.log("Parsing file to check formatting")
-var file = fs.readFileSync("data/snippets.json", "utf-8")
+var file = fs.readFileSync("data/snippets-all.json", "utf-8")
 var data = JSON.parse(file);
 var snippets = undefined;
 console.log(`Checking data. 
@@ -11,7 +11,7 @@ for(var d of data){
     if(d.snippets == snippets){
         console.log("SAME: " + d.id)
     }
-    if(d.results === 0){
+    if(d.snippets.length === 0){
         console.log("EMPTY: " + d.id);
     }
     snippets = d.snippets;

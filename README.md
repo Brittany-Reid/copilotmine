@@ -20,3 +20,5 @@ VSCode appears to have issues switching editors between the co-pilot window and 
 ## Info
 
 Originally the suggestions panel was a text editor you could just access, but now it's a WebView panel I can't. Instead, the extension uses the copilot logs to get the suggestions.
+
+You might experience some issues with the algorithm to find the latest log. I just presume the debug window is the newest window in the newest 'session'. Try closing all VSCode editors and re-opening. 
